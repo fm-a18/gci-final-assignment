@@ -56,3 +56,15 @@ print(data_summary['Data Type'].value_counts())
 print("\nCATEGORICAL COLUMNS: ")
 print(data_summary[data_summary['Data Type'] == 'object'])
 
+# Count of missing values per column
+missing_counts = df.isna().sum()
+
+# Take the 20 columns with the most missing values
+top_missing = missing_counts.sort_values(ascending=False).head(20)
+
+# Plot
+sns.barplot(x=top_missing.values, y=top_missing.index)
+plt.xlabel('Number of missing values')
+plt.title('Top 20 columns by number of missing values')
+plt.show()
+
