@@ -10,3 +10,33 @@ from sklearn.dummy import DummyClassifier
 from sklearn.metrics import (accuracy_score, precision_score, recall_score, f1_score,
                              confusion_matrix, ConfusionMatrixDisplay, classification_report)
 
+pd.set_option("display.max_columns", 120)
+
+# FOR COLAB
+'''
+from google.colab import drive
+drive.mount('/content/drive')
+cd "/content/drive/MyDrive/Final Assignment"
+'''
+
+import os
+from pathlib import Path
+
+current_dir = Path(os.getcwd())
+client_path = current_dir / "telecom" / "Client.csv"
+record_path = current_dir / "telecom" / "Record.csv"
+
+for p in (client_path, record_path):
+    print(f"{'OK ' if p.exists() else 'MISSING '} {p}")
+
+client = pd.read_csv(client_path)
+record = pd.read_csv(record_path)
+
+print(f"Client: {client.shape}")
+print(f"Record: {record.shape}")
+
+# Merge on Customer_ID. Both tables have one row per customer, so this is a 1:1 join.
+df = record.merge(client, on='Customer_ID', how='inner')
+print(f"Merged: {df.shape}")
+df.head()
+
