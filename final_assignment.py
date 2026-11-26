@@ -22,6 +22,9 @@ cd "/content/drive/MyDrive/Final Assignment"
 import os
 from pathlib import Path
 
+OUTPUT_DIR = Path(__file__).with_name("results")
+OUTPUT_DIR.mkdir(exist_ok=True)
+
 current_dir = Path(os.getcwd())
 client_path = current_dir / "telecom" / "Client.csv"
 record_path = current_dir / "telecom" / "Record.csv"
@@ -66,6 +69,7 @@ top_missing = missing_counts.sort_values(ascending=False).head(20)
 sns.barplot(x=top_missing.values, y=top_missing.index)
 plt.xlabel('Number of missing values')
 plt.title('Top 20 columns by number of missing values')
+plt.savefig(OUTPUT_DIR / "top20.png", dpi=150, bbox_inches="tight")
 plt.show()
 
 # BAR CHART
@@ -76,6 +80,7 @@ for container in ax.containers:
 ax.set_xticks([0, 1], labels=["Stayed", "Churned"])
 plt.title("Churn Distribution")
 plt.ylabel("No. of Customers")
+plt.savefig(OUTPUT_DIR / "churn_count.png", dpi=150, bbox_inches="tight")
 plt.show()
 
 # HISTOGRAM
@@ -84,4 +89,6 @@ for feature in ['months', 'eqpdays', 'rev_Mean']:
     sns.histplot(data=df, x=feature, hue="churn", bins=30, kde=True)
     plt.title(f"{title_name} by Churn")
     plt.xlabel(title_name)
+    plt.savefig(OUTPUT_DIR / f"hist_{feature}.png", dpi=150, bbox_inches="tight")
     plt.show()
+
