@@ -78,8 +78,8 @@ for container in ax.containers:
     ax.bar_label(container)
 
 ax.set_xticks([0, 1], labels=["Stayed", "Churned"])
-plt.title("Churn Distribution")
-plt.ylabel("No. of Customers")
+plt.title('Churn Distribution')
+plt.ylabel('No. of Customers')
 plt.savefig(OUTPUT_DIR / "churn_count.png", dpi=150, bbox_inches="tight")
 plt.show()
 
@@ -92,3 +92,10 @@ for feature in ['months', 'eqpdays', 'rev_Mean']:
     plt.savefig(OUTPUT_DIR / f"hist_{feature}.png", dpi=150, bbox_inches="tight")
     plt.show()
 
+# BOX PLOT
+sns.boxplot(x='churn', y='eqpdays', data=df, hue='churn', palette=["#F54927", "#25B342"], legend=False)
+plt.title('Equipment Age by Churn')
+plt.xlabel('Churn [0 = Stayed, 1 = Churned]')
+plt.ylabel('Equipment Age (Days)')
+plt.savefig(OUTPUT_DIR / "churn_boxplot.png", dpi=150, bbox_inches="tight")
+plt.show()
