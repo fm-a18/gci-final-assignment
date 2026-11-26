@@ -68,3 +68,12 @@ plt.xlabel('Number of missing values')
 plt.title('Top 20 columns by number of missing values')
 plt.show()
 
+# BAR CHART
+ax = sns.countplot(x="churn", data=df, hue="churn", palette=["#F54927", "#25B342"], legend=False)
+for container in ax.containers:
+    ax.bar_label(container)
+
+ax.set_xticks([0, 1], labels=["Stayed", "Churned"])
+plt.title("Churn Distribution")
+plt.ylabel("No. of Customers")
+plt.show()
