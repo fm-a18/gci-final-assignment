@@ -40,3 +40,19 @@ df = record.merge(client, on='Customer_ID', how='inner')
 print(f"Merged: {df.shape}")
 df.head()
 
+# Data Overview
+data_summary = pd.DataFrame({
+    'Data Type': df.dtypes,
+    'Missing Values': df.isna().sum(),
+    'Missing %': (df.isnull().mean() * 100).round(1),
+    'Unique Values': df.nunique()
+})
+
+print("DATASET SIZE: ", df.shape)
+
+print("\nCOLUMNS BY TYPE: ")
+print(data_summary['Data Type'].value_counts())
+
+print("\nCATEGORICAL COLUMNS: ")
+print(data_summary[data_summary['Data Type'] == 'object'])
+
