@@ -77,3 +77,11 @@ ax.set_xticks([0, 1], labels=["Stayed", "Churned"])
 plt.title("Churn Distribution")
 plt.ylabel("No. of Customers")
 plt.show()
+
+# HISTOGRAM
+for feature in ['months', 'eqpdays', 'rev_Mean']:
+    title_name = feature.replace('_', ' ').title()
+    sns.histplot(data=df, x=feature, hue="churn", bins=30, kde=True)
+    plt.title(f"{title_name} by Churn")
+    plt.xlabel(title_name)
+    plt.show()
